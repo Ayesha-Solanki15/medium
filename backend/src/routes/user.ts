@@ -34,7 +34,9 @@ userRouter.post("/signup", async (c) => {
       c.status(403);
       return c.json({ msg: "User already exists" });
     }
-    return c.json({ msg: "user created successfully" });
+    const token = await sign({ id: newUser.id }, c.env.JWT_SECRET);
+    c.res.headers.set("Authorization", `Bearer ${token}`);
+    return c.json({ msg: "user signed in successfully", jwt: token });
   } catch (e) {
     console.log(e);
     return c.json({ msg: "error while signing up" });
