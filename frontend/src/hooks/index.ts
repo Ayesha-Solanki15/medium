@@ -14,7 +14,7 @@ export interface BlogTypeProps {
 
 export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
-  const [blog, setBlog] = useState<BlogTypeProps | null>(null);
+  const [blog, setBlog] = useState<BlogTypeProps | undefined>();
 
   useEffect(() => {
     axios
